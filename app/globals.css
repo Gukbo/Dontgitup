@@ -1,0 +1,21 @@
+@import url("https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css");
+@import "tailwindcss";
+
+:root {
+  --mainbg: #020205;
+  --primary: #ffe81f;
+  --cardbg: #1c1c22;
+  --star: #ffffff;
+  --red: #eb212e;
+  --blue: #2e67f8;
+}
+
+@theme inline {
+  --font-game: "Galmuri9";
+  --color-mainbg: var(--mainbg);
+  --color-primary: var(--primary);
+  --color-cardbg: var(--cardbg);
+  --color-star: var(--star);
+  --color-red: var(--red);
+  --color-blue: var(--blue);
+}

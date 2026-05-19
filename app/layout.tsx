@@ -8,11 +8,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
-        <Navbar />
-
-        {/* 각 페이지(page.tsx)의 내용이 들어가는 자리 */}
-        <main>{children}</main>
+      <body className="bg-mainbg">
+        <div className="flex flex-col h-screen overflow-hidden ">
+          <Navbar />
+          <main className="flex-1 w-full overflow-hidden">{children}</main>
+        </div>
       </body>
     </html>
   );

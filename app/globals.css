@@ -4,10 +4,11 @@
 :root {
   --mainbg: #020205;
   --primary: #ffe81f;
-  --cardbg: #1c1c22;
+  --cardbg: #353535;
   --star: #ffffff;
   --red: #eb212e;
   --blue: #2e67f8;
+  --magenta: #e600ff;
 }
 
 @theme inline {
@@ -18,4 +19,5 @@
   --color-star: var(--star);
   --color-red: var(--red);
   --color-blue: var(--blue);
+  --color-magenta: var(--magenta);
 }

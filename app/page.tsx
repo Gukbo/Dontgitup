@@ -1,5 +1,5 @@
-import PersonaCard from "./components/card/personaCard";
-import { MOCK_PERSONA_DATA } from "./constants/mockData";
+import PersonaCard from "../components/card/personaCard";
+import { MOCK_PERSONA_DATA } from "../constants/mockData";
 
 export default function Home() {
   return (

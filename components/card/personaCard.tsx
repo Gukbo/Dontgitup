@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { PersonaInfo } from "@/app/types/search";
+import { PersonaInfo } from "@/types/search";
 
 interface PersonaCardProps {
   className?: string;
@@ -31,8 +31,12 @@ export default function PersonaCard({ className, data }: PersonaCardProps) {
           <p className="text-white font-game">
             {data.name} <span className="text-gray-400 text-sm">{data.id}</span>
           </p>
-          <p className="text-white text-sm font-game ">followers : {data.followersCount.toLocaleString()}</p>
-          <p className="text-white text-sm font-game">총 커밋 수 : {data.commitsCount.toLocaleString()}</p>
+          <p className="text-white text-sm font-game ">
+            followers : {data.followersCount.toLocaleString()}
+          </p>
+          <p className="text-white text-sm font-game">
+            총 커밋 수 : {data.commitsCount.toLocaleString()}
+          </p>
           <p className="text-white font-game">{data.tier}</p>
           <p className="text-white font-game pt-4">badge Collection</p>
         </div>

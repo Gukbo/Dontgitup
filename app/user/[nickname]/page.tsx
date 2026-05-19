@@ -1,5 +1,5 @@
-import PersonaCard from "@/app/components/card/personaCard";
-import { MOCK_PERSONA_DATA } from "@/app/constants/mockData";
+import PersonaCard from "@/components/card/personaCard";
+import { MOCK_PERSONA_DATA } from "@/constants/mockData";
 
 interface Props {
   params: Promise<{ nickname: string }>;

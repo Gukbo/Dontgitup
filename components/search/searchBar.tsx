@@ -25,7 +25,7 @@ export default function SearchBar({ sizeClassName = "w-64" }: SearchFormProps) {
         placeholder="Search for a user..."
         autoComplete="off"
         maxLength={39}
-        className={`text-center text-white font-game border-0 focus:outline-hidden focus:border-b-2 border-primary ${sizeClassName}`}
+        className={`text-center text-white font-game border-b-2 border-transparent focus:outline-hidden focus:border-b-2 focus:border-primary ${sizeClassName}`}
       />
     </Form>
   );

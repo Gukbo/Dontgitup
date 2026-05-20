@@ -1,4 +1,4 @@
-import { PersonaInfo } from "@/app/types/search";
+import { PersonaInfo } from "@/types/search";
 
 export const MOCK_PERSONA_DATA: PersonaInfo = {
   id: "Gukbo",

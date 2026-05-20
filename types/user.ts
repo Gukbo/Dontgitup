@@ -8,6 +8,12 @@ export interface PersonaInfo {
   badges: string[];
 }
 
+export interface LanguageData {
+  name: string;
+  value: number;
+  color: string;
+}
+
 export type DeveloperTier =
   | "Bronze IV"
   | "Bronze III"

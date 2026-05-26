@@ -1,5 +1,10 @@
+import ChartCard from "@/components/card/chartCard";
 import PersonaCard from "@/components/card/personaCard";
-import { MOCK_PERSONA_DATA } from "@/constants/mockData";
+import { MOCK_PERSONA_DATA, MOCK_CHART_DATA } from "@/constants/mockData";
+import {
+  fetchGithubLanguages,
+  transformLanguageData,
+} from "@/service/githubService";
 
 interface Props {
   params: Promise<{ nickname: string }>;
@@ -35,6 +40,8 @@ async function getGithubProfile(nickname: string): Promise<GithubRawData> {
 
 export default async function DashboardPage({ params }: Props) {
   const { nickname } = await params;
+  const rawGqlData = await fetchGithubLanguages(nickname);
+  const languageData = transformLanguageData(rawGqlData);
   const rawData = await getGithubProfile(nickname);
   const personaData = {
     ...MOCK_PERSONA_DATA,
@@ -47,8 +54,14 @@ export default async function DashboardPage({ params }: Props) {
   return (
     <div className="w-full h-full max-w-7xl mx-auto p-6">
       <div className="w-[95%] h-[92%] grid grid-cols-12 grid-rows-11 gap-4">
-        <PersonaCard className="col-span-3 row-span-11" data={personaData} />
-        {/* div들 더 채워넣기 */}
+        <PersonaCard
+          className="col-span-3 row-span-11 col-start-1 row-start-1"
+          data={personaData}
+        />
+        <ChartCard
+          className="col-span-5 row-span-5 col-start-4 row-start-2"
+          chartData={languageData}
+        />
       </div>
     </div>
   );

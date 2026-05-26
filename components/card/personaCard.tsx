@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { PersonaInfo } from "@/types/search";
+import { PersonaInfo } from "@/types/user";
 
 interface PersonaCardProps {
   className?: string;

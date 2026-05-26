@@ -17,9 +17,15 @@ interface GithubRawData {
   followers: number;
 }
 
-async function getGithubProfile(nickname: string): Promise<GithubRawData> {
-  const IS_MOCK = true;
-  if (IS_MOCK) {
+// 🎛️ [대장 스위치] true: 무조건 가짜 데이터만 사용 (API 호출 0회) / false: 진짜 실시간 깃허브 데이터 연동!
+const IS_MOCK = true;
+
+// 👤 프로필을 가져오는 전담 함수 (IS_MOCK을 인자로 받도록 수정)
+async function getGithubProfile(
+  nickname: string,
+  isMock: boolean,
+): Promise<GithubRawData> {
+  if (isMock) {
     return {
       login: nickname,
       name: "Neum_Dev",
@@ -40,9 +46,22 @@ async function getGithubProfile(nickname: string): Promise<GithubRawData> {
 
 export default async function DashboardPage({ params }: Props) {
   const { nickname } = await params;
-  const rawGqlData = await fetchGithubLanguages(nickname);
-  const languageData = transformLanguageData(rawGqlData);
-  const rawData = await getGithubProfile(nickname);
+
+  // 1️⃣ [차트 데이터 스위치 제어]
+  let languageData;
+
+  if (IS_MOCK) {
+    // 스위치가 켜져 있으면 깃허브 함수(fetch) 근처에도 안 가고 바로 가짜 데이터 주입!
+    languageData = MOCK_CHART_DATA;
+  } else {
+    // 개발이 끝나고 배포할 때(false)만 진짜 서버로 출발!
+    const rawGqlData = await fetchGithubLanguages(nickname);
+    languageData = transformLanguageData(rawGqlData);
+  }
+
+  // 2️⃣ [프로필 데이터 가져오기] 대장 스위치 상태를 전달합니다.
+  const rawData = await getGithubProfile(nickname, IS_MOCK);
+
   const personaData = {
     ...MOCK_PERSONA_DATA,
     id: rawData.login,
@@ -60,7 +79,7 @@ export default async function DashboardPage({ params }: Props) {
         />
         <ChartCard
           className="col-span-5 row-span-5 col-start-4 row-start-2"
-          chartData={languageData}
+          chartData={languageData} // 👈 걸러진 데이터 주입!
         />
       </div>
     </div>

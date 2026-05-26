@@ -40,7 +40,7 @@ export default function ChartCard({
 
   return (
     <div
-      className={`w-full h-full bg-mainbg border-2 border-magenta p-6 rounded-xl flex flex-col items-center justify-center shadow-lg ${className}`}
+      className={`w-full h-full bg-mainbg border-2 border-magenta p-6 rounded-3xl flex flex-col items-center justify-center shadow-lg ${className}`}
     >
       <h3 className="text-white text-lg mb-6 font-game">Language usage</h3>
 

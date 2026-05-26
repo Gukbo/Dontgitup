@@ -1,6 +1,10 @@
 import ChartCard from "@/components/card/chartCard";
 import PersonaCard from "@/components/card/personaCard";
 import { MOCK_PERSONA_DATA, MOCK_CHART_DATA } from "@/constants/mockData";
+import {
+  fetchGithubLanguages,
+  transformLanguageData,
+} from "@/service/githubService";
 
 interface Props {
   params: Promise<{ nickname: string }>;
@@ -36,6 +40,8 @@ async function getGithubProfile(nickname: string): Promise<GithubRawData> {
 
 export default async function DashboardPage({ params }: Props) {
   const { nickname } = await params;
+  const rawGqlData = await fetchGithubLanguages(nickname);
+  const languageData = transformLanguageData(rawGqlData);
   const rawData = await getGithubProfile(nickname);
   const personaData = {
     ...MOCK_PERSONA_DATA,
@@ -54,7 +60,7 @@ export default async function DashboardPage({ params }: Props) {
         />
         <ChartCard
           className="col-span-5 row-span-5 col-start-4 row-start-2"
-          chartData={MOCK_CHART_DATA}
+          chartData={languageData}
         />
       </div>
     </div>

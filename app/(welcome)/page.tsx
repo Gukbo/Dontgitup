@@ -11,7 +11,7 @@ export default function Home() {
         <p className="text-white font-game text-xl">
           Commit More, Unlock Your Badges
         </p>
-        <SearchBar sizeClassName="w-96" />
+        <SearchBar sizeClassName="w-full max-w-md px-4" />
         <div className="flex flex-col items-center text-center mt-10">
           <div className="flex flex-row items-center justify-center gap-8">
             <Link

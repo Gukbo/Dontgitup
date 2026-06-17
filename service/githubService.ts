@@ -1,5 +1,35 @@
 import { LanguageData } from "@/types/user";
 
+export interface GithubRawData {
+  avatar_url: string;
+  name: string;
+  login: string;
+  followers: number;
+}
+
+export async function getGithubProfile(
+  nickname: string,
+  isMock: boolean,
+): Promise<GithubRawData> {
+  if (isMock) {
+    return {
+      login: nickname,
+      name: "Neum_Dev",
+      avatar_url: "/mock_img.png",
+      followers: 128,
+    };
+  }
+  
+  const res = await fetch(`https://api.github.com/users/${nickname}`, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2026-03-10",
+    },
+  });
+  if (!res.ok) throw new Error("Failed to fetch Github profile");
+  return res.json();
+}
+
 // 1️⃣ [추가] 깃허브 GraphQL이 뱉어주는 Raw 데이터의 명확한 이름표(Interface) 정의
 interface LanguageEdge {
   size: number;

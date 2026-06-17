@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { LanguageData } from "@/types/user";
 import {
   PieChart,
@@ -24,7 +25,9 @@ export default function ChartCard({
   chartData,
   className = "",
 }: LanguagePieChartProps) {
-  const totalValue = chartData.reduce((acc, curr) => acc + curr.value, 0);
+  const totalValue = useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.value, 0);
+  }, [chartData]);
 
   const customTooltipFormatter: TooltipProps<
     ValueType,

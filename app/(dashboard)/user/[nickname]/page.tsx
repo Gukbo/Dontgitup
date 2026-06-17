@@ -4,50 +4,21 @@ import { MOCK_PERSONA_DATA, MOCK_CHART_DATA } from "@/constants/mockData";
 import {
   fetchGithubLanguages,
   transformLanguageData,
+  getGithubProfile,
 } from "@/service/githubService";
+
+// import 해오기 추후 수정 예정
 
 interface Props {
   params: Promise<{ nickname: string }>;
+  // params정보를 사용할 때 작성 
 }
 
-interface GithubRawData {
-  avatar_url: string;
-  name: string;
-  login: string;
-  followers: number;
-}
-
-// 🎛️ [대장 스위치] true: 무조건 가짜 데이터만 사용 (API 호출 0회) / false: 진짜 실시간 깃허브 데이터 연동!
-const IS_MOCK = true;
-
-// 👤 프로필을 가져오는 전담 함수 (IS_MOCK을 인자로 받도록 수정)
-async function getGithubProfile(
-  nickname: string,
-  isMock: boolean,
-): Promise<GithubRawData> {
-  if (isMock) {
-    return {
-      login: nickname,
-      name: "Neum_Dev",
-      avatar_url: "/mock_img.png",
-      followers: 128,
-    };
-  }
-
-  const res = await fetch(`https://api.github.com/users/${nickname}`, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2026-03-10",
-    },
-  });
-  if (!res.ok) throw new Error("Failed to fetch Github profile");
-  return res.json();
-}
+const IS_MOCK = true; // true : 가짜 데이터 , false : 진짜 데이터
 
 export default async function DashboardPage({ params }: Props) {
   const { nickname } = await params;
 
-  // 1️⃣ [차트 데이터 스위치 제어]
   let languageData;
 
   if (IS_MOCK) {

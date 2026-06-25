@@ -1,5 +1,8 @@
 import ChartCard from "@/components/card/chartCard";
 import PersonaCard from "@/components/card/personaCard";
+import StreakCard from "@/components/card/streakCard";
+import RepoCard from "@/components/card/RepoCard";
+import FooterCard from "@/components/card/footerCard";
 import { MOCK_PERSONA_DATA, MOCK_CHART_DATA } from "@/constants/mockData";
 import {
   fetchGithubLanguages,
@@ -11,7 +14,7 @@ import {
 
 interface Props {
   params: Promise<{ nickname: string }>;
-  // params정보를 사용할 때 작성 
+  // params정보를 사용할 때 작성
 }
 
 const IS_MOCK = true; // true : 가짜 데이터 , false : 진짜 데이터
@@ -45,13 +48,16 @@ export default async function DashboardPage({ params }: Props) {
     <div className="w-full h-full max-w-7xl mx-auto p-6">
       <div className="w-[95%] h-[92%] grid grid-cols-12 grid-rows-11 gap-4">
         <PersonaCard
-          className="col-span-3 row-span-11 col-start-1 row-start-1"
+          className="col-span-3 row-span-12 col-start-1 row-start-1"
           data={personaData}
         />
         <ChartCard
           className="col-span-5 row-span-5 col-start-4 row-start-2"
           chartData={languageData} // 👈 걸러진 데이터 주입!
         />
+        <StreakCard className="col-span-4 row-span-6 col-start-9 row-start-2" />
+        <RepoCard className="col-span-5 row-span-6 col-start-4 row-start-7" />
+        <FooterCard className="col-span-4 row-span-5 col-start-9 row-start-8" />
       </div>
     </div>
   );
